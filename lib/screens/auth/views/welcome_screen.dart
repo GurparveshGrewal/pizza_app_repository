@@ -1,6 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pizza_app/blocs/bloc/authentication_bloc.dart';
+import 'package:pizza_app/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'package:pizza_app/screens/auth/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:pizza_app/screens/auth/views/signin_screen.dart';
 import 'package:pizza_app/screens/auth/views/signup_screen.dart';
 
@@ -89,12 +93,25 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                             ]),
                       ),
                       Expanded(
-                          child: TabBarView(
-                              controller: _tabController,
-                              children: const [
-                            SignInScreen(),
-                            SignUpScreen(),
-                          ])),
+                          child:
+                              TabBarView(controller: _tabController, children: [
+                        BlocProvider<SignInBloc>(
+                          create: (context) => SignInBloc(
+                            userRepository: context
+                                .read<AuthenticationBloc>()
+                                .userRepository,
+                          ),
+                          child: const SignInScreen(),
+                        ),
+                        BlocProvider<SignUpBloc>(
+                          create: (context) => SignUpBloc(
+                            userRepository: context
+                                .read<AuthenticationBloc>()
+                                .userRepository,
+                          ),
+                          child: const SignUpScreen(),
+                        ),
+                      ])),
                     ],
                   ),
                 ),
