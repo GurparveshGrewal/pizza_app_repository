@@ -6,3 +6,17 @@ sealed class SignUpEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class SignUpProcessEvent extends SignUpEvent {
+  final MyUser myUser;
+  final String password;
+
+  const SignUpProcessEvent({
+    required this.myUser,
+    required this.password,
+  });
+}
+
+class SignUpSuccessEvent extends SignUpEvent {}
+
+class SignUpFailedEvent extends SignUpEvent {}
