@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pizza_app/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -16,6 +18,12 @@ class _SignInScreenState extends State<SignInScreen> {
   void _onSignInClick() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+      setState(() {
+        isLoading = true;
+      });
+      context
+          .read<SignInBloc>()
+          .add(SignInRequired(enteredEmail!, enteredPassword!));
     }
   }
 

@@ -138,6 +138,7 @@ class DetailsPage extends StatelessWidget {
                             'Buy Now',
                             style: TextStyle(
                               fontSize: 16,
+                              color: Colors.white,
                             ),
                           )),
                     )

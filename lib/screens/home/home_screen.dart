@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pizza_app/screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:pizza_app/screens/home/details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -31,15 +33,13 @@ class HomeScreen extends StatelessWidget {
           IconButton(
               iconSize: 26,
               color: Colors.grey.shade600,
-              onPressed: () {
-                // context.read<SignInBloc>().add(Sign);
-              },
+              onPressed: () {},
               icon: const Icon(Icons.shopping_cart_outlined)),
           IconButton(
               iconSize: 26,
               color: Colors.grey.shade600,
               onPressed: () {
-                // context.read<SignInBloc>().add(Sign);
+                context.read<SignInBloc>().add(SignOutRequired());
               },
               icon: const Icon(Icons.logout_outlined))
         ],
